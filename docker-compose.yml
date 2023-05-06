@@ -4,7 +4,7 @@ services:
     image: postgres
     env_file: ./.env
     ports:
-      - "5433:5432"
+      - ${POSTGRES_LOCAL_PORT}:${POSTGRES_DOCKER_PORT}
     environment:
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
@@ -19,11 +19,11 @@ services:
     build: .
     env_file: ./.env
     ports:
-      - "6868:8080"
-#      - $DEBUG_PORT : $DEBUG_PORT
+      - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}
+      - ${DEBUG_PORT}:${DEBUG_PORT}
     environment:
       SPRING_APPLICATION_JSON: '{
       "spring.datasource.url" : "jdbc:postgresql://postgres:$POSTGRES_DOCKER_PORT/$POSTGRES_DB",
       "spring.datasource.username" : "$POSTGRES_USER",
       "spring.datasource.password" : "$POSTGRES_PASSWORD"}'
-#      JAVA_TOOL_OPTIONS : "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      JAVA_TOOL_OPTIONS : "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"

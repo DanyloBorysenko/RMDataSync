@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovieCharacterMapper {
     public MovieCharacter parseApiResponseDto(ApiCharacterDto dto) {
+        if (dto == null) {
+            throw new RuntimeException("ApiCharacterDto can't be null");
+        }
         MovieCharacter movieCharacter = new MovieCharacter();
         movieCharacter.setName(dto.getName());
         movieCharacter.setGender(Gender.valueOf(dto.getGender().toUpperCase()));
@@ -19,6 +22,9 @@ public class MovieCharacterMapper {
     }
 
     public MovieCharacterResponseDto toResponseDto(MovieCharacter movieCharacter) {
+        if (movieCharacter == null) {
+            throw new RuntimeException("MovieCharacter can't be null");
+        }
         MovieCharacterResponseDto dto = new MovieCharacterResponseDto();
         dto.setGender(movieCharacter.getGender().name());
         dto.setId(movieCharacter.getId());

@@ -1,7 +1,14 @@
 package borysenko.examples.rickandmorty.model;
 
-import jakarta.persistence.*;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "movie_character")
@@ -64,8 +71,8 @@ public class MovieCharacter {
         return externalId;
     }
 
-    public void setExternalId(Long external_id) {
-        this.externalId = external_id;
+    public void setExternalId(Long externalId) {
+        this.externalId = externalId;
     }
 
     @Override
