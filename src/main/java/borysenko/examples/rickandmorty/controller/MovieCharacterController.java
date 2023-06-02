@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @Log4j2
 @RestController
@@ -19,6 +20,22 @@ public class MovieCharacterController {
 
     public MovieCharacterController(MovieCharacterService service) {
         this.service = service;
+    }
+
+    @GetMapping("/")
+    public ModelAndView index() {
+        return new ModelAndView("index");
+    }
+
+    @GetMapping
+    public List<MovieCharacterResponseDto> getAll(
+            @RequestParam(defaultValue = "0")
+            @ApiParam(value = "default value is '0'") Integer page,
+            @RequestParam(defaultValue = "10")
+            @ApiParam(value = "default value is '0'")Integer count,
+            @RequestParam(defaultValue = "name")
+            @ApiParam(value = "default value is 'name' ") String sortBy) {
+        return service.getAll(page, count, sortBy);
     }
 
     @ApiOperation(value = "Get random character")

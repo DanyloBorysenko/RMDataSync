@@ -9,4 +9,6 @@ public interface MovieCharacterService {
     MovieCharacterResponseDto getRandomCharacter();
 
     List<MovieCharacterResponseDto> getByNamePart(String namePart);
+
+    List<MovieCharacterResponseDto> getAll(Integer page, Integer count, String sortBy);
 }

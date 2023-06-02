@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +27,16 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
     private final HttpClient httpClient;
     private final MovieCharacterRepository repository;
     private final MovieCharacterMapper mapper;
+    private final PageRequestService pageRequestService;
 
-    public MovieCharacterServiceImpl(HttpClient httpClient, MovieCharacterRepository repository,
-                                     MovieCharacterMapper mapper) {
+    public MovieCharacterServiceImpl(HttpClient httpClient,
+                                     MovieCharacterRepository repository,
+                                     MovieCharacterMapper mapper,
+                                     PageRequestService pageRequestService) {
         this.httpClient = httpClient;
         this.repository = repository;
         this.mapper = mapper;
+        this.pageRequestService = pageRequestService;
     }
 
     @Scheduled(cron = "0 0 22 31 * ?")
@@ -62,6 +67,14 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
     public List<MovieCharacterResponseDto> getByNamePart(String namePart) {
         List<MovieCharacter> allByNamePart = repository.findAllByNameContains(namePart);
         return allByNamePart.stream().map(mapper::toResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MovieCharacterResponseDto> getAll(Integer page, Integer count, String sortBy) {
+        PageRequest pageRequest = pageRequestService.createPageRequest(page, count, sortBy);
+        return repository.findAll(pageRequest).toList().stream()
+                .map(mapper::toResponseDto)
+                .collect(Collectors.toList());
     }
 
     List<MovieCharacter> saveDtoToDB(ApiResponseDto apiResponseDto) {
