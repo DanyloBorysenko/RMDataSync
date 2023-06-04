@@ -1,0 +1,2 @@
+INSERT INTO movie_character (id, name, status, gender, external_id) VALUES (1,'bob', 'ALIVE', 'MALE', 1);
+INSERT INTO movie_character (id, name, status, gender, external_id) VALUES (2,'alice', 'ALIVE', 'FEMALE', 2);

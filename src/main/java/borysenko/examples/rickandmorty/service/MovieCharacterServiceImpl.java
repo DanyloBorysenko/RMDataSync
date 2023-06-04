@@ -39,7 +39,7 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
         this.pageRequestService = pageRequestService;
     }
 
-    @Scheduled(cron = "0 0 22 31 * ?")
+    @Scheduled(cron = "0 30 12 3 * *")
     @Override
     public void syncExternalMovieCharacters() {
         log.info("Method syncExternalMovieCharacters was called at " + LocalDateTime.now());
