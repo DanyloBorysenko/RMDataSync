@@ -96,6 +96,12 @@ Example Response:
   }
 ]
 ```
+## :eyes:How it looks like
+https://rick-and-morty.azurewebsites.net/
+
+The site may take a long time to load. It's because of azure cold start.
+After 30 seconds, reload the page. You should see a cartoon image. If you see this, the site is working 
+and you can send your requests to the appropriate endpoints presented above.
 ## :muscle: ## 
 That's it! You should now be able to use the danylojavadev/rick-and-morty app through the provided Docker containers.
 If you need stop containers Run the following command: 
