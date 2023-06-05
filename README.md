@@ -1,4 +1,5 @@
-# Rick-and-Morty-app
+<h1 align="center">Rick-and-Morty-app</h1>
+
 ## :pencil: Project description :pencil:
 This is a Spring Boot application that synchronizes movie character data from an external API 
 and stores it in a PostgreSQL database. It provides REST API endpoints to retrieve random movie characters, 
