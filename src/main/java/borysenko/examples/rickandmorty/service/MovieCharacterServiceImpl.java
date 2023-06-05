@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -39,7 +40,8 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
         this.pageRequestService = pageRequestService;
     }
 
-    @Scheduled(cron = "0 30 12 3 * *")
+    @PostConstruct
+    @Scheduled(cron = "30 * * * * *")
     @Override
     public void syncExternalMovieCharacters() {
         log.info("Method syncExternalMovieCharacters was called at " + LocalDateTime.now());
